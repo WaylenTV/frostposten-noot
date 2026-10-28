@@ -91,6 +91,7 @@ h1{font-family:var(--f-display);font-weight:800;font-size:1.65rem;letter-spacing
 .needs{display:flex;gap:6px;align-items:center;min-width:0}
 .need{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;padding:1px 6px;border-radius:3px;border:1px solid var(--rc);color:var(--rc);white-space:nowrap;background:rgba(10,14,24,.4)}
 .need b{font-weight:600;margin-left:3px}.need b.qhi{color:var(--ok)}.need b.qmid{color:var(--energy)}.need b.qlo{color:var(--alarm)}
+.room .more{font-family:var(--f-mono);font-size:.72rem;color:var(--mute);align-self:center;padding-left:2px}
 .pats{display:flex;align-items:flex-end;gap:1px;margin-left:auto;font-family:var(--f-mono);font-size:.68rem;color:var(--ok);white-space:nowrap}
 .pats{gap:0;font-size:.74rem}
 .pats .pg{width:22px;height:27px;transform:rotate(-90deg);margin:-4px -1px -6px}
@@ -135,11 +136,39 @@ h1{font-family:var(--f-display);font-weight:800;font-size:1.65rem;letter-spacing
 .confirm{margin-top:10px;padding:10px;border:1px dashed var(--alarm);border-radius:6px;display:flex;flex-direction:column;gap:8px;font-size:.86rem}
 .btn.danger{border-color:var(--alarm);color:var(--alarm)}
 .btn.danger.hot{background:var(--alarm);color:#1b0a0d}
-.desert .surface,.desert .outside,.desert .room.rock,.desert .shaft{filter:sepia(.85) saturate(1.8) hue-rotate(-14deg) brightness(.97)}
-.desert{--rock:#2b1d13;--rock2:#24180f}
-.desert .base{background:repeating-linear-gradient(180deg,var(--rock) 0 34px,var(--rock2) 34px 70px)}
-.desert .room.empty{background:rgba(30,20,12,.6);border-color:#6b4c33}
-.desert .fx-storm{filter:sepia(1) saturate(2.4) hue-rotate(-18deg)}
+body[data-planet="desert"]{--rock:#2b1d13;--rock2:#24180f}
+body[data-planet="desert"] :is(.surface,.outside,.room.rock,.shaft){filter:sepia(.85) saturate(1.8) hue-rotate(-14deg) brightness(.97)}
+body[data-planet="desert"] .fx-storm{filter:sepia(1) saturate(2.4) hue-rotate(-18deg)}
+body[data-planet="volcano"]{--rock:#2a1210;--rock2:#220d0b}
+body[data-planet="volcano"] :is(.surface,.outside,.room.rock,.shaft){filter:sepia(.9) saturate(3) hue-rotate(-32deg) brightness(.72) contrast(1.1)}
+body[data-planet="volcano"] .fx-storm{filter:grayscale(1) brightness(.55)}
+body[data-planet="jungle"]{--rock:#13221a;--rock2:#0f1c15}
+body[data-planet="jungle"] :is(.surface,.outside,.room.rock,.shaft){filter:sepia(.6) saturate(2.4) hue-rotate(55deg) brightness(.82)}
+body[data-planet="jungle"] .fx-storm{filter:hue-rotate(-20deg) saturate(.6)}
+body[data-planet="ocean"]{--rock:#0d2230;--rock2:#0a1c28}
+body[data-planet="ocean"] :is(.surface,.outside,.room.rock,.shaft){filter:saturate(2) hue-rotate(-28deg) brightness(.88)}
+body[data-planet="crystal"]{--rock:#211735;--rock2:#1b122d}
+body[data-planet="crystal"] :is(.surface,.outside,.room.rock,.shaft){filter:saturate(1.8) hue-rotate(62deg) brightness(.95)}
+body[data-planet="crystal"] .fx-storm{filter:hue-rotate(70deg) saturate(2)}
+body[data-planet="pirate"]{--rock:#1d1724;--rock2:#17121e}
+body[data-planet="pirate"] :is(.surface,.outside,.room.rock,.shaft){filter:sepia(.55) saturate(1.6) hue-rotate(235deg) brightness(.7)}
+body[data-planet="pirate"] .fx-storm{filter:hue-rotate(160deg) saturate(2.5)}
+body:not([data-planet="ice"]) .base{background:repeating-linear-gradient(180deg,var(--rock) 0 34px,var(--rock2) 34px 70px)}
+body:not([data-planet="ice"]) .room.empty{background:rgba(0,0,0,.25);border-color:rgba(255,255,255,.18)}
+.modal.map .card{width:min(640px,100%);max-width:640px;max-height:calc(100vh - 32px);overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.pl{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+.pl.here{border-color:var(--beak)}.pl.locked{opacity:.55}
+.pl .pli b{font-family:var(--f-display);font-size:1.02rem}.pl .pli small{display:block;font-family:var(--f-mono);font-size:.7rem;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.pl .pli p{margin:4px 0 0;font-size:.84rem;color:var(--text)}
+.orb{width:48px;height:48px;border-radius:50%;display:block;box-shadow:inset -8px -6px 14px rgba(0,0,0,.55),0 0 14px rgba(255,255,255,.08)}
+.orb[data-p="ice"]{background:radial-gradient(circle at 35% 35%,#f4fbff,#9cc7dd 45%,#2c4a66)}
+.orb[data-p="desert"]{background:radial-gradient(circle at 35% 35%,#ffe2a8,#c9853f 50%,#5a3418)}
+.orb[data-p="volcano"]{background:radial-gradient(circle at 35% 35%,#ffb26b,#c0391b 45%,#2a0c08)}
+.orb[data-p="jungle"]{background:radial-gradient(circle at 35% 35%,#c8f5a0,#3f9a4a 50%,#123220)}
+.orb[data-p="ocean"]{background:radial-gradient(circle at 35% 35%,#b8f2ff,#1f8fbf 50%,#08304a)}
+.orb[data-p="crystal"]{background:radial-gradient(circle at 35% 35%,#ffe0ff,#b07ae0 50%,#2d1650)}
+.orb[data-p="pirate"]{background:radial-gradient(circle at 35% 35%,#d9c7e8,#6b4a7d 50%,#1d1226)}
+@media (max-width:560px){.pl{grid-template-columns:40px minmax(0,1fr)}.pl .plb{grid-column:1/-1}.orb{width:38px;height:38px}}
 .planetbtn{flex-direction:column;align-items:flex-start;gap:0;padding:6px 12px}
 .planetbtn small{display:block;font-family:var(--f-mono);font-size:.7rem;font-weight:400;color:var(--mute)}
 .menu textarea{width:100%;min-height:70px;background:var(--panel);border:1px solid var(--line2);border-radius:5px;color:var(--text);font-family:var(--f-mono);font-size:.7rem;padding:6px;resize:vertical;word-break:break-all}
@@ -403,6 +432,12 @@ body.paused .basewrap *,body.paused .basewrap *::before,body.paused .basewrap *:
 </div>
 <div class="toast" id="toast" hidden></div>
 <div class="tut" id="tut" hidden role="dialog" aria-label="Tutorial"></div>
+<div class="modal map" id="map" hidden><div class="card" role="dialog" aria-label="Sternkarte">
+  <h2>Sternkarte</h2>
+  <p class="hint" style="margin:0">Jeder Planet hat eigene Stärken. Besiedelte Basen ruhen, solange du woanders bist. Credits, Kristalle, Elixiere, Ausrüstung und Aufträge teilen sich alle Basen.</p>
+  <div id="mapList" style="display:flex;flex-direction:column;gap:8px"></div>
+  <div class="actions" style="margin:0"><button class="btn" id="mapClose">Schließen</button></div>
+</div></div>
 <div class="modal menu" id="menu" hidden><div class="card" role="dialog" aria-label="Menü">
   <h2>Menü</h2>
   <div class="row"><label id="lMus">Musik</label><button class="sw" id="swMus" role="switch" aria-labelledby="lMus" aria-checked="false"></button><input type="range" id="volMus" min="0" max="100" aria-label="Lautstärke Musik"><small>Ruhiger Eis-Ambient, wird bei Angriffen treibender.</small></div>
@@ -428,11 +463,11 @@ body.paused .basewrap *,body.paused .basewrap *::before,body.paused .basewrap *:
 (()=>{
 const $=s=>document.querySelector(s);
 const SAVE='frostposten-noot-v1', CFG='frostposten-noot-cfg';
-const COLS=7, MAXF=6, MAXLVL=3;
+const COLS=7, MAXF=6, MAXLVL=6;
 /* Außenpost-Stufe bestimmt das Fassungsvermögen der Hauptlager */
 const OUTPOST=[{cap:200},{cap:350,cr:250,cc:3},{cap:550,cr:500,cc:6},{cap:800,cr:900,cc:10},{cap:1100,cr:1500,cc:15}];
 const opLvl=()=>S.op||1;
-const capOf=()=>OUTPOST[opLvl()-1].cap;
+const capOf=()=>OUTPOST[opLvl()-1].cap+S.cells.reduce((a,c,i)=>a+(c&&c.type==='depot'?Math.round(60*c.lvl*(1+MERGE_BONUS*(grpOf(i).len-1))):0),0);
 const ROOM={
   reactor:{n:'Fusionsreaktor',k:'Reaktor',r:'energy',s:'T',cost:60,d:'Erzeugt Energie für alle Räume. Arbeiter brauchen Technik.'},
   krill:{n:'Krillfarm',r:'krill',s:'P',cost:60,d:'Züchtet Krill, die Nahrung der Kolonie. Arbeiter brauchen Pflege.'},
@@ -441,21 +476,29 @@ const ROOM={
   med:{n:'Krankenstation',k:'Lazarett',r:'potions',s:'P',cost:100,d:'Erschöpfte Pinguine kommen automatisch hierher und erholen sich etwa doppelt so schnell, mit guten Pflegern drei- bis viermal so schnell. 3/5/7 Betten je Stufe. Braut nebenbei Elixiere. Arbeiter brauchen Pflege.'},
   shield:{n:'Schildgenerator',k:'Schild',cost:120,cc:4,d:'Gibt +12 Abwehr pro Stufe gegen Angriffe, solange Energie da ist. Verbraucht viel Energie und braucht Eiskristalle.'},
   nest:{n:'Brutstation',k:'Brutnest',r:'eggs',s:'P',cost:110,d:'Zwei Pinguine kümmern sich um ein Gelege. Mit guter Pflege entsteht schneller ein Ei. Einsammeln brütet es aus: Das Küken erbt die gemittelten Fähigkeiten seiner beiden Eltern. Braucht ein freies Bett.'},
+  labor:{n:'Forschungslabor',k:'Labor',r:'crystals',s:'T',cost:150,d:'Züchtet Eiskristalle im Reagenzglas. Langsamer als Expeditionen, aber ohne Risiko. Arbeiter brauchen Technik.'},
+  workshop:{n:'Werkstatt',r:'gear',s:'A',cost:140,d:'Schmiedet Ausrüstung aus Schrott. Einsammeln legt das fertige Teil ins Lager. Arbeiter brauchen Ausdauer.'},
+  canteen:{n:'Kantine',w:true,s:'P',col:'#ffb37a',cost:100,d:'Gemeinsames Essen spart Vorräte: Mit Crew sinkt der Krill- und Sauerstoffverbrauch der ganzen Kolonie, je besser die Pflege, desto mehr (höchstens 60 %). Arbeiter brauchen Pflege.'},
+  radio:{n:'Funkturm',k:'Funkturm',w:true,s:'T',col:'#a970ff',cost:130,d:'Sendet Rufe ins All und lockt neue Siedler an. Mit guter Technik kommen sie schneller. Braucht ein freies Bett. Arbeiter brauchen Technik.'},
+  academy:{n:'Akademie',w:true,s:'M',col:'#6fe3a5',cost:160,cc:2,d:'Hier trainieren Pinguine eine Fähigkeit deiner Wahl mit dreifacher Erfahrung. Produziert nichts, macht die Kolonie aber besser.'},
+  depot:{n:'Vorratslager',k:'Lager',cost:90,d:'Mehr Platz in den Hauptlagern: +60 Energie, Krill und Sauerstoff pro Stufe. Braucht keine Crew.'},
   quarters:{n:'Quartier',cost:80,d:'Platz für 4 Pinguine pro Stufe.'}
 };
-const INC={reactor:'Kurzschluss',krill:'Krill-Ausbruch',oxy:'Filterbrand',hangar:'Eiseinbruch',med:'Keimalarm',nest:'Kükenpanik'};
-const BUF={credits:[25,60,120],potions:[3,6,10],eggs:[1,2,3],other:[40,90,160]};
+const INC={reactor:'Kurzschluss',krill:'Krill-Ausbruch',oxy:'Filterbrand',hangar:'Eiseinbruch',med:'Keimalarm',nest:'Kükenpanik',labor:'Laborbrand',workshop:'Maschinenschaden',canteen:'Küchenbrand',radio:'Antennenbruch',academy:'Trainingsunfall'};
+const BUF={credits:[25,60,120,200,300,450],potions:[3,6,10,14,18,24],eggs:[1,2,3,4,5,6],crystals:[2,4,6,9,12,16],gear:[1,2,3,4,5,6],other:[40,90,160,250,360,500]};
 const bufCap=(c,l)=>{const r=ROOM[c.type].r;return (BUF[r]||BUF.other)[(l||c.lvl)-1];};
 const roomDrain=c=>c.type==='quarters'?0.06:c.type==='shield'?0.25:0.12;
 /* Leere Arbeitsräume laufen im Frostschutz-Modus mit 25 % Strom */
-const roomUse=(c,i)=>roomDrain(c)*c.lvl*(ROOM[c.type].r&&c.type!=='med'&&!crewOf(i).some(q=>!q.ex)?.25:1);
+const roomUse=(c,i)=>roomDrain(c)*c.lvl*(isWork(c)&&c.type!=='med'&&!crewOf(i).some(q=>!q.ex)?.25:1);
 /* Arbeitende essen und atmen voll, Ruhende 60 %, Expeditionen nehmen Proviant mit */
-const eatUse=()=>S.peng.reduce((a,q)=>a+(q.exp?0:q.room!=null&&!q.ex?0.09:0.054),0);
+function canteenCut(){return Math.min(.6,S.cells.reduce((a,c,i)=>{if(!c||c.type!=='canteen'||c.inc)return a;const cr=crewOf(i).filter(q=>!q.ex);if(!cr.length)return a;return a+(0.06*c.lvl+0.012*cr.reduce((x,q)=>x+q.P,0))*(1+MERGE_BONUS*(grpOf(i).len-1));},0));}
+const eatUse=()=>S.peng.reduce((a,q)=>a+(q.exp?0:q.room!=null&&!q.ex?0.09:0.054),0)*(1-canteenCut());
 const NOT_CD=300;
 const EXP=[{d:60,n:'Kurz'},{d:120,n:'Mittel'},{d:240,n:'Lang'}];
 const expDrain=p=>Math.max(.08,.35-.025*p.A);
 const fmtT=x=>{x=Math.max(0,Math.round(x));return `${Math.floor(x/60)}:${String(x%60).padStart(2,'0')}`;};
-const upCc=c=>(c.type==='shield'?3*c.lvl:0)+(c.lvl===2?3:0);
+const CC_UP=[0,3,6,10,15];
+const upCc=c=>(c.type==='shield'?3*c.lvl:0)+(CC_UP[c.lvl-1]||0);
 /* Verbund: gleiche Räume gleicher Stufe direkt nebeneinander verschmelzen (max. 3) */
 const MERGE_BONUS=.15;
 function groupsOf(){
@@ -475,14 +518,23 @@ const grpOf=i=>GRP[i]||{start:i,len:1,pos:0};
 const grpCells=i=>{const g=grpOf(i);return Array.from({length:g.len},(_,k)=>g.start+k);};
 /* ===== Planeten ===== */
 const PLANETS={
-  ice:{key:'ice',name:'Krios-7',sub:'Eisplanet Krios-7 · Gletscherbasis',storm:'Eissturm',stormV:'Die Kollektoren vereisen',rock:'Gletschereis',field:'Eisfeld',inField:'im Eisfeld',toField:'ins Eisfeld',hInc:'Eiseinbruch',mods:{},about:'Ausgeglichen. Kristalle aus dem Gletscher.'},
-  desert:{key:'desert',name:'Kessra',sub:'Wüstenplanet Kessra · Tafelberg-Basis',storm:'Sandsturm',stormV:'Die Kollektoren versanden',rock:'Sandstein',field:'Wüste',inField:'in der Wüste',toField:'in die Wüste',hInc:'Sandeinbruch',mods:{energy:1.3,oxy:.8,credits:1.25},about:'Zwei Sonnen: +30 % Energie, +25 % Credits, aber −20 % Sauerstoff. Expeditionen finden mehr Ausrüstung.'}
+  ice:{key:'ice',name:'Krios-7',kind:'Eisplanet',storm:'Eissturm',stormV:'Die Kollektoren vereisen',rock:'Gletschereis',field:'Eisfeld',inField:'im Eisfeld',toField:'ins Eisfeld',hInc:'Eiseinbruch',mods:{},tag:'',about:'Der Heimatplanet. Ausgeglichen, ohne Stärken und Schwächen.'},
+  desert:{key:'desert',name:'Kessra',kind:'Wüstenplanet',storm:'Sandsturm',stormV:'Die Kollektoren versanden',rock:'Sandstein',field:'Wüste',inField:'in der Wüste',toField:'in die Wüste',hInc:'Sandeinbruch',mods:{energy:1.3,oxy:.8,credits:1.25},gearCh:.15,tag:'Sand',cost:{cr:600,cc:8},need:5,about:'Zwei Sonnen: +30 % Energie, +25 % Credits, mehr Ausrüstung auf Expeditionen. Aber −20 % Sauerstoff.'},
+  volcano:{key:'volcano',name:'Pyra',kind:'Vulkanplanet',storm:'Ascheregen',stormV:'Asche verstopft die Kollektoren',rock:'Basalt',field:'Lavafeld',inField:'im Lavafeld',toField:'ins Lavafeld',hInc:'Lavaeinbruch',mods:{energy:1.5,krill:.8,gear:1.3},inc:1.3,tag:'Glut',cost:{cr:900,cc:12},need:4,about:'Erdwärme: +50 % Energie, +30 % Werkstatt. Aber −20 % Krill und 30 % mehr Störfälle.'},
+  jungle:{key:'jungle',name:'Verdana',kind:'Dschungelmond',storm:'Monsun',stormV:'Der Regen flutet die Kollektoren',rock:'Wurzelgestein',field:'Dschungel',inField:'im Dschungel',toField:'in den Dschungel',hInc:'Ranken-Einbruch',mods:{krill:1.4,oxy:1.4,eggs:1.4,energy:.8},expPot:2,tag:'Moos',cost:{cr:1300,cc:16},need:4,about:'Üppiges Leben: +40 % Krill, Sauerstoff und Eier, doppelt so viele Elixiere auf Expeditionen. Aber −20 % Energie.'},
+  ocean:{key:'ocean',name:'Aquarion',kind:'Ozeanwelt',storm:'Sturmflut',stormV:'Die Flut legt die Kollektoren lahm',rock:'Korallenfels',field:'Riff',inField:'am Riff',toField:'zum Riff',hInc:'Wassereinbruch',mods:{krill:1.6,potions:1.5,credits:.8},evF:1.4,tag:'Welle',cost:{cr:1800,cc:20},need:4,about:'Krill im Überfluss: +60 % Krill, +50 % Elixiere, und Piraten kommen seltener. Aber −20 % Credits.'},
+  crystal:{key:'crystal',name:'Lumis',kind:'Kristallwelt',storm:'Splittersturm',stormV:'Kristallsplitter zerkratzen die Kollektoren',rock:'Kristallgestein',field:'Kristallfeld',inField:'im Kristallfeld',toField:'ins Kristallfeld',hInc:'Splittereinbruch',mods:{crystals:1.6,energy:.9},expCry:2,tag:'Glanz',cost:{cr:2500,cc:25},need:4,about:'Kristalle überall: doppelt so viele auf Expeditionen, Labore +60 %. Aber −10 % Energie.'},
+  pirate:{key:'pirate',name:'Korsa',kind:'Schmugglermond',storm:'Ionensturm',stormV:'Ionen überlasten die Kollektoren',rock:'Schmugglerfels',field:'Schrottfeld',inField:'im Schrottfeld',toField:'ins Schrottfeld',hInc:'Schmuggler-Einbruch',mods:{credits:1.6,gear:1.5},gearCh:.25,atk:1.4,evF:.7,tag:'Pirat',cost:{cr:3300,cc:30},need:4,about:'Reiche Beute: +60 % Credits, +50 % Werkstatt, viel Ausrüstung. Aber Piraten greifen öfter und härter an.'}
 };
+const PORDER=['ice','desert','volcano','jungle','ocean','crystal','pirate'];
 const PL=()=>PLANETS[S.planet||'ice'];
 const BASE_KEYS=['t','energy','krill','oxy','floors','cells','peng','wait','attack','boost','rates','nextEvent','lastInc','op','recall','res','notT'];
-const KESSRA={op:5,cr:600,cc:8};
+const isWork=c=>!!(c&&(ROOM[c.type].r||ROOM[c.type].w));
+const skillOf=c=>c.type==='academy'?(c.tr||'M'):ROOM[c.type].s;
+const roomCol=c=>{const R=ROOM[c.type];return R.r?RES[R.r].c:(R.col||'var(--ice)');};
+const FUNK=240;
 const STAT={T:'Technik',P:'Pflege',A:'Ausdauer',M:'Mut'};
-const RES={energy:{n:'Energie',c:'var(--energy)'},krill:{n:'Krill',c:'var(--krill)'},potions:{n:'Elixier',k:'Elixier',c:'#6fe3a5'},eggs:{n:'Ei',k:'Ei',c:'#f3dfb4'},oxy:{n:'Sauerstoff',k:'O₂',c:'var(--oxy)'},credits:{n:'Credits',c:'var(--credits)'}};
+const RES={energy:{n:'Energie',c:'var(--energy)'},krill:{n:'Krill',c:'var(--krill)'},potions:{n:'Elixier',k:'Elixier',c:'#6fe3a5'},eggs:{n:'Ei',k:'Ei',c:'#f3dfb4'},crystals:{n:'Eiskristall',k:'◆',c:'#9be7ff'},gear:{n:'Ausrüstung',k:'Teil',c:'#c7b4ff'},oxy:{n:'Sauerstoff',k:'O₂',c:'var(--oxy)'},credits:{n:'Credits',c:'var(--credits)'}};
 const NAMES=['Frost','Tuk','Wobbel','Kiro','Fenna','Slush','Mako','Tilla','Krümel','Zuzu','Brix','Nilla','Kapt. Flossi','Glimmer','Juno','Pebble','Rasko','Yuki','Tonka','Smørre','Ivo','Kesh','Lumi','Orla','Vex'];
 const HELM=['#f2a33a','#7fd6ff','#ff8f7a','#6fe3a5','#c7b4ff','#f5c84b','#ff6fb1','#9fb3c8'];
 
@@ -618,39 +670,53 @@ function ensureHangar(){ /* Hangar gehört fest auf Ebene 1 ganz links */
   S.cells[0]={type:'hangar',lvl:1};log('Ein Hangar mit Tor nach draußen wurde der Basis übergeben.','good');
 }
 function stat(k,n=1){S.st=S.st||{};S.st[k]=(S.st[k]||0)+n;}
-function iceOp(){return S.planet==='desert'?((S.away&&S.away.ice&&S.away.ice.op)||1):opLvl();}
+function opOf(k){return (S.planet||'ice')===k?opLvl():((S.away&&S.away[k]&&S.away[k].op)||0);}
 function hasBase(k){return (S.planet||'ice')===k||!!(S.away&&S.away[k]);}
-function foundBase(){
+function planetState(k){ /* aktiv | besiedelt | bereit | gesperrt */
+  if((S.planet||'ice')===k)return 'aktiv';if(hasBase(k))return 'besiedelt';
+  const idx=PORDER.indexOf(k),prev=PORDER[idx-1],P=PLANETS[k];
+  return hasBase(prev)&&opOf(prev)>=P.need?'bereit':'gesperrt';
+}
+function foundBase(tag){
   Object.assign(S,{t:0,energy:80,krill:80,oxy:80,floors:2,cells:Array(COLS*MAXF).fill(null),peng:[],wait:[],attack:null,boost:0,rates:{},nextEvent:150,lastInc:0,op:1,recall:null,res:null,notT:null});
   S.cells[0]={type:'hangar',lvl:1};S.cells[1]={type:'quarters',lvl:1};S.cells[2]={type:'reactor',lvl:1};S.cells[3]={type:'krill',lvl:1};S.cells[4]={type:'oxy',lvl:1};
-  for(let k=0;k<3;k++){let nm;do{nm=pick(NAMES);}while(S.peng.some(q=>q.name===nm));S.peng.push(newPeng(nm+' Sand',false));}
+  for(let k=0;k<3;k++){let nm;do{nm=pick(NAMES)+' '+tag;}while(S.peng.some(q=>q.name===nm));S.peng.push(newPeng(nm,false));}
   S.peng[0].room=2;S.peng[1].room=3;S.peng[2].room=4;
 }
 function clearMoves(){moving.forEach(m=>{clearTimeout(m.t);m.el&&m.el.remove();});moving.clear();moveQ=[];$('#fx').innerHTML='';}
 function switchPlanet(to){
-  const cur=S.planet||'ice';if(to===cur)return;
+  const cur=S.planet||'ice';if(to===cur)return;const P=PLANETS[to];
   if(S.attack){toast('Während eines Angriffs kann niemand die Basis verlassen.');return;}
-  if(!hasBase(to)){
-    if(iceOp()<KESSRA.op){toast(`Kessra wird ab Außenposten-Stufe ${KESSRA.op} auf Krios-7 freigeschaltet.`);return;}
-    if(S.credits<KESSRA.cr||(S.crystals||0)<KESSRA.cc){toast(`Für den neuen Außenposten brauchst du ${KESSRA.cr} Credits und ${KESSRA.cc} Eiskristalle.`);return;}
-  }
+  const st=planetState(to);
+  if(st==='gesperrt'){toast(`${P.name} wird frei, wenn ${PLANETS[PORDER[PORDER.indexOf(to)-1]].name} Außenposten-Stufe ${P.need} erreicht.`);return;}
+  if(st==='bereit'&&(S.credits<P.cost.cr||(S.crystals||0)<P.cost.cc)){toast(`Für ${P.name} brauchst du ${P.cost.cr} Credits und ${P.cost.cc} Eiskristalle.`);return;}
   save();clearMoves();
   S.away=S.away||{};const keep={};BASE_KEYS.forEach(k=>{keep[k]=S[k];delete S[k];});S.away[cur]=keep;
   let founded=false;
   if(S.away[to]){Object.assign(S,S.away[to]);delete S.away[to];}
-  else{S.credits-=KESSRA.cr;S.crystals-=KESSRA.cc;foundBase();founded=true;}
-  S.planet=to;selP=null;selC=null;armed=false;outKey='';GRP=groupsOf();applyPlanet();sfx('expIn');
-  if(founded){log(`Neuer Außenposten auf ${PL().name} gegründet! Drei Siedler sind gelandet.`,'good');ribbon(`<b>Willkommen auf ${PL().name}</b> · ${PL().about}`,'var(--beak)');}
-  else{log(`Kommando nach ${PL().name} verlegt.`);ribbon(`Kommando auf <b>${PL().name}</b>`,'var(--beak)');}
+  else{S.credits-=P.cost.cr;S.crystals-=P.cost.cc;foundBase(P.tag);founded=true;stat('planets');}
+  S.planet=to;selP=null;selC=null;armed=false;outKey='';GRP=groupsOf();applyPlanet();sfx('expIn');openMap(false);
+  if(founded){log(`Neuer Außenposten auf ${P.name} gegründet! Drei Siedler sind gelandet.`,'good');ribbon(`<b>Willkommen auf ${P.name}</b> · ${P.about}`,'var(--beak)');}
+  else{log(`Kommando nach ${P.name} verlegt.`);ribbon(`Kommando auf <b>${P.name}</b>`,'var(--beak)');}
   save();render();
 }
-function applyPlanet(){document.body.classList.toggle('desert',S.planet==='desert');}
+function applyPlanet(){document.body.dataset.planet=S.planet||'ice';}
 function renderPlanetBtn(){
-  const cur=S.planet||'ice',other=cur==='ice'?'desert':'ice',has=hasBase(other),ok=iceOp()>=KESSRA.op;
-  const b=$('#planetBtn');b.hidden=!has&&iceOp()<4;
-  $('#planetTxt').textContent=has?`Nach ${PLANETS[other].name}`:'Kessra besiedeln';
-  $('#planetSub').textContent=has?'die andere Basis ruht':ok?`${KESSRA.cr} Cr + ${KESSRA.cc} ◆ · Wüstenplanet`:`ab Außenposten-Stufe ${KESSRA.op}`;
-  b.disabled=!!S.attack||(!has&&(!ok||S.credits<KESSRA.cr||(S.crystals||0)<KESSRA.cc));
+  const n=PORDER.filter(hasBase).length;
+  $('#planetTxt').textContent='Sternkarte';
+  $('#planetSub').textContent=`${PL().name} · ${n} / ${PORDER.length} besiedelt`;
+  if(!$('#map').hidden)renderMap();
+}
+function openMap(v){$('#map').hidden=!v;if(v)renderMap();}
+function renderMap(){
+  const html=PORDER.map(k=>{const P=PLANETS[k],st=planetState(k),i=PORDER.indexOf(k);
+    const prev=i?PLANETS[PORDER[i-1]]:null,afford=P.cost&&S.credits>=P.cost.cr&&(S.crystals||0)>=P.cost.cc;
+    const btn=st==='aktiv'?'<span class="tag" style="color:var(--beak);border-color:var(--beak)">Du bist hier</span>'
+      :st==='besiedelt'?`<button class="btn hot" data-planet="${k}" ${S.attack?'disabled':''}>Hinfliegen</button>`
+      :st==='bereit'?`<button class="btn hot" data-planet="${k}" ${!afford||S.attack?'disabled':''}>Besiedeln · ${P.cost.cr} Cr + ${P.cost.cc}&nbsp;◆</button>`
+      :`<span class="tag">ab ${prev.name} Stufe ${P.need}</span>`;
+    return `<div class="pl${st==='gesperrt'?' locked':''}${st==='aktiv'?' here':''}"><i class="orb" data-p="${k}"></i><div class="pli"><b>${P.name}</b><small>${P.kind}${hasBase(k)?` · Außenposten Stufe ${opOf(k)}`:''}</small><p>${P.about}</p></div><div class="plb">${btn}</div></div>`;}).join('');
+  $('#mapList').innerHTML=html;
 }
 function save(){try{localStorage.setItem(SAVE,JSON.stringify(S));}catch(e){}}
 
@@ -662,7 +728,7 @@ function log(msg,cls=''){
 let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2600);}
 
 const capacity=()=>S.cells.reduce((a,c,i)=>{if(!c||c.type!=='quarters')return a;const g=grpOf(i);return a+c.lvl*4+(g.pos===0?2*(g.len-1):0);},0);
-const slots=c=>c.lvl+1;
+const slots=c=>Math.min(5,c.lvl+1);
 const crewOf=i=>S.peng.filter(p=>p.room===i);
 const digCost=()=>60*S.floors;
 const recCost=()=>30+10*S.peng.length;
@@ -702,29 +768,32 @@ function fxBoost(){fxAdd('fx-flash','',2000);}
 function tick(){
   S.t++;
   GRP=groupsOf();
-  const r={energy:0,krill:0,oxy:0,credits:0,potions:0,eggs:0};
+  const r={energy:0,krill:0,oxy:0,credits:0,potions:0,eggs:0,crystals:0,gear:0};
   const pop=S.peng.length;
   S.cells.forEach((c,i)=>{
     if(!c)return;
     r.energy-=roomUse(c,i);
-    const R=ROOM[c.type];if(!R.r)return;
-    const crew=crewOf(i).filter(p=>!p.ex);
+    const R=ROOM[c.type];if(!isWork(c))return;
+    const crew=crewOf(i).filter(p=>!p.ex),sk=skillOf(c);
     if(c.rush&&S.t%60===0)c.rush--;
     if(c.inc){ /* Störfall: Crew kämpft automatisch, aber langsam */
-      c.out=0;c.inc.hp-=0.12*crew.reduce((a,p)=>a+p[R.s],0);crew.forEach(p=>p.hp-=1.6);
+      c.out=0;c.inc.hp-=0.12*crew.reduce((a,p)=>a+p[sk],0);crew.forEach(p=>p.hp-=1.6);
       if(c.inc.hp<=0)endInc(i);return;}
     if(!crew.length){c.out=0;return;}
+    if(!R.r){serviceTick(c,i,crew);return;}
     if((c.buf||0)>=bufCap(c)){c.out=0;c.buf=bufCap(c);return;}
     let out=0.35*c.lvl+0.07*crew.reduce((a,p)=>a+p[R.s],0);
     if(R.r==='credits')out*=0.5;
     if(R.r==='potions')out*=0.015;
     if(R.r==='eggs')out=crew.length>=2?out*0.008:0;
+    if(R.r==='crystals')out*=0.004;
+    if(R.r==='gear')out*=0.003;
     out*=1+MERGE_BONUS*(grpOf(i).len-1);
     out*=PL().mods[R.r]||1;
     if(c.type==='reactor'&&S.boost>0)out*=2;
     if(S.energy<=0&&c.type!=='reactor')out*=0.3;
     c.out=out;c.buf=Math.min(bufCap(c),(c.buf||0)+out);r[R.r]+=out;
-    if(out>0)crew.forEach(q=>{if(!moving.has(q.id))gainXP(q,R.s);});
+    if(out>0)crew.forEach(q=>{if(!moving.has(q.id))gainXP(q,sk);});
   });
   const eat=eatUse();r.krill-=eat;r.oxy-=eat;
   S.rates=r;
@@ -750,16 +819,27 @@ function tick(){
     for(let i=0;i<S.cells.length;i++){if(Math.random()<incRate(i)){startInc(i);break;}}
   }
   if(S.attack){S.attack.t--;if(S.attack.t<=0)resolveAttack();}
-  else if(--S.nextEvent<=0){randomEvent();S.nextEvent=rnd(110,170);}
+  else if(--S.nextEvent<=0){randomEvent();S.nextEvent=Math.round(rnd(110,170)*(PL().evF||1));}
   if(S.t%5===0)save();
   render();
 }
 
+/* Räume ohne Produktion: Kantine, Funkturm, Akademie */
+function serviceTick(c,i,crew){
+  const sk=skillOf(c),work=crew.filter(q=>!moving.has(q.id));c.out=0;
+  if(c.type==='academy'){work.forEach(q=>{gainXP(q,sk);gainXP(q,sk);gainXP(q,sk);});return;}
+  work.forEach(q=>gainXP(q,sk));
+  if(c.type==='radio'){
+    c.prog=Math.min(FUNK,(c.prog||0)+(0.4+0.06*work.reduce((a,q)=>a+q.T,0))*(1+.25*(c.lvl-1))*(1+MERGE_BONUS*(grpOf(i).len-1)));
+    if(c.prog>=FUNK&&S.peng.length<capacity()){c.prog=0;let nm;do{nm=pick(NAMES);}while(S.peng.some(q=>q.name===nm)&&S.peng.length<NAMES.length);if(S.peng.some(q=>q.name===nm))nm+=' '+rnd(2,99);
+      join(nm,false,'auf den Funkruf hin gelandet');}
+  }
+}
 function randomEvent(){
   const e=pick(['storm','drop','pirates','pirates','scrap']);
   if(e==='storm')storm();else if(e==='drop')drop('Eine treibende Versorgungskapsel wurde geborgen');
   else if(e==='scrap'){const c=rnd(20,45);S.credits+=c;fxCrash(c);log(`Ein Frachter ist ${PL().inField} abgestürzt. Die Crew birgt ${c} Credits.`,'good');}
-  else startAttack(8+S.peng.length*2+S.floors*3+rnd(0,8),'Raumpiraten');
+  else startAttack((8+S.peng.length*2+S.floors*3+rnd(0,8))*(PL().atk||1),'Raumpiraten');
 }
 function storm(by){sfx('storm');const l=Math.round(S.energy*0.35);S.energy-=l;fxStorm();log(`${PL().storm}${by?' (ausgelöst von '+by+')':''}! ${PL().stormV}, ${l} Energie verloren.`,'bad');flash(['reactor']);}
 function drop(why){sfx('drop');fxDrop();ribbon(esc(why),'#6fe3a5');S.energy=Math.min(capOf(),S.energy+35);S.krill=Math.min(capOf(),S.krill+35);S.oxy=Math.min(capOf(),S.oxy+35);S.credits+=20;log(`${why}: +35 Energie, Krill und Sauerstoff, +20 Credits.`,'good');}
@@ -834,12 +914,19 @@ function demolish(i){
 function tilePos(i){const W=document.querySelector('.basewrap').getBoundingClientRect(),el=document.querySelector(`#base [data-i="${i}"]`);if(!el)return null;const r=el.getBoundingClientRect();return{x:r.left-W.left+r.width/2,y:r.top-W.top+40};}
 function collect(i){
   const c=S.cells[i];if(!c||!ROOM[c.type].r)return;
-  if(ROOM[c.type].r==='eggs')return hatch(i);const res=ROOM[c.type].r,amt=Math.floor(c.buf||0);if(amt<1)return;
-  let take=amt;if(res!=='credits')take=Math.min(amt,Math.floor((res==='potions'?20:capOf())-(S[res]||0)));
+  if(ROOM[c.type].r==='eggs')return hatch(i);
+  if(ROOM[c.type].r==='gear')return craft(i);const res=ROOM[c.type].r,amt=Math.floor(c.buf||0);if(amt<1)return;
+  let take=amt;if(res!=='credits'&&res!=='crystals')take=Math.min(amt,Math.floor((res==='potions'?20:capOf())-(S[res]||0)));
   if(take<=0){sfx('error');toast(`Das ${RES[res].n}-Lager ist voll.`);return;}
   S[res]=(S[res]||0)+take;c.buf-=take;sfx('collect',res);stat('col_'+res,take);
   const pp=tilePos(i);if(pp)fxFloat(`+${take} ${RES[res].n}`,pp.x+'px',pp.y,RES[res].c);
   render();
+}
+function craft(i){
+  const c=S.cells[i];let n=Math.floor(c.buf||0);if(n<1)return;S.gear=S.gear||[];const got=[];
+  while(n>=1){const g=rollGear();S.gear.push(g);got.push(gearName(g));c.buf-=1;n--;}
+  stat('crafted',got.length);sfx('upgrade');log(`Die Werkstatt hat gefertigt: ${got.join(', ')}.`,'good');
+  const pp=tilePos(i);if(pp)fxFloat(got.join(', '),pp.x+'px',pp.y,'#c7b4ff');render();
 }
 function hatch(i){
   const c=S.cells[i];let n=Math.floor(c.buf||0);if(n<1)return;
@@ -859,7 +946,7 @@ function hatch(i){
   sfx('noot');render();
 }
 function startInc(i){
-  if(i==null){const pool=S.cells.map((c,k)=>({c,k})).filter(o=>o.c&&ROOM[o.c.type].r&&!o.c.inc&&crewOf(o.k).some(q=>!q.ex));
+  if(i==null){const pool=S.cells.map((c,k)=>({c,k})).filter(o=>o.c&&isWork(o.c)&&!o.c.inc&&crewOf(o.k).some(q=>!q.ex));
     if(!pool.length){toast('Kein besetzter Raum, in dem etwas passieren kann.');return;}i=pick(pool).k;}
   S.lastInc=S.t;const c=S.cells[i];const hp=30+12*c.lvl;c.inc={name:c.type==='hangar'?PL().hInc:INC[c.type],hp,max:hp};sfx('incident');
   log(`Störfall: ${c.inc.name} in ${ROOM[c.type].n} (Ebene ${Math.floor(i/COLS)+1})! Eingreifen!`,'bad');
@@ -893,7 +980,7 @@ function collapse(p,why){
 function recover(p){
   const from=p.ward;p.ex=false;p.ward=null;p.grace=S.t+30; /* 30 s Schonfrist nach der Genesung */
   let t=p.prev;p.prev=null;
-  const ok=t!=null&&S.cells[t]&&ROOM[S.cells[t].type].r&&crewOf(t).length<slots(S.cells[t]);
+  const ok=t!=null&&isWork(S.cells[t])&&crewOf(t).length<slots(S.cells[t]);
   if(ok){p.room=t;queueMove(p,from,t);log(`${p.name} ist wieder fit und geht zurück an die Arbeit (${ROOM[S.cells[t].type].n}).`,'good');}
   else{queueMove(p,from,null);log(`${p.name} ist wieder einsatzbereit.`,'good');}
 }
@@ -919,10 +1006,10 @@ function feed(p){
 }
 /* Störfälle entstehen nur bei der Arbeit. Je schlechter die Crew zum Raum passt, desto öfter. */
 function incRate(i){
-  const c=S.cells[i];if(!c||!ROOM[c.type].r||c.inc)return 0;
+  const c=S.cells[i];if(!c||!isWork(c)||c.inc)return 0;
   const crew=crewOf(i).filter(q=>!q.ex&&!moving.has(q.id));if(!crew.length)return 0;
-  const s=ROOM[c.type].s;
-  return 0.0018*crew.reduce((a,q)=>a+Math.max(.08,0.25+(10-q[s])*0.14),0)*(1+0.15*(crew.length-1));
+  const s=skillOf(c);
+  return (PL().inc||1)*0.0018*crew.reduce((a,q)=>a+Math.max(.08,0.25+(10-q[s])*0.14),0)*(1+0.15*(crew.length-1));
 }
 function riskLabel(i){const r=1-Math.pow(1-incRate(i),60);return r<=0?['','keins']:r<.12?['lo','niedrig']:r<.3?['mid','mittel']:['hi','hoch'];}
 
@@ -996,10 +1083,10 @@ function startExp(p,dur){
 }
 function returnExp(p){
   const el=S.t-p.exp.start,rolls=Math.max(1,Math.floor(el/30));let cr=0,cry=0,pot=0,dep=false;
-  for(let i=0;i<rolls;i++){cr+=rnd(6,16);if(Math.random()<.25+.02*p.M)cry++;if(Math.random()<.15)pot++;if(Math.random()<.04){dep=true;cr+=40;cry+=2;}}
+  for(let i=0;i<rolls;i++){cr+=rnd(6,16);if(Math.random()<.25+.02*p.M)cry+=PL().expCry||1;if(Math.random()<.15)pot+=PL().expPot||1;if(Math.random()<.04){dep=true;cr+=40;cry+=2;}}
   let stray=null;
   for(let i=0;i<rolls&&!stray;i++)if(Math.random()<.04+.005*p.M){let n;do{n=pick(NAMES);}while(S.peng.some(q=>q.name===n)&&S.peng.length<NAMES.length);if(S.peng.some(q=>q.name===n)||S.wait.includes(n))n+=' '+rnd(2,99);stray=n;}
-  const loot=[];for(let i=0;i<rolls;i++)if(Math.random()<(S.planet==='desert'?.15:.09))loot.push(rollGear());if(dep)loot.push(rollGear());
+  const loot=[];for(let i=0;i<rolls;i++)if(Math.random()<(PL().gearCh||.09))loot.push(rollGear());if(dep)loot.push(rollGear());
   S.gear=S.gear||[];loot.forEach(g=>S.gear.push(g));stat('exp');stat('cry',cry);
   S.credits+=cr;S.crystals=(S.crystals||0)+cry;S.potions=Math.min(20,(S.potions||0)+pot);
   const hurt=p.hp<=10;p.exp=null;sfx('expIn');
@@ -1030,7 +1117,7 @@ function rush(i){
 /* Darstellung */
 function fmt(n){return n>=100||n===0?Math.floor(n):n.toFixed(n<10?1:0);}
 function renderRes(){
-  $('#subline').textContent=`${PL().sub.split(' · ')[0]} · Außenposten Stufe ${opLvl()}`;
+  $('#subline').textContent=`${PL().kind} ${PL().name} · Außenposten Stufe ${opLvl()}`;
   $('#res').innerHTML=['energy','krill','oxy','credits'].map(k=>[k,RES[k]]).map(([k,R])=>{
     const v=S[k],rt=S.rates[k]||0,cap=k==='credits'?null:capOf();
     const low=cap&&v<cap*0.12;
@@ -1047,19 +1134,28 @@ let lastAlert=null;
 function recallTarget(p){
   if(!S.recall||!(p.id in S.recall)||p.ex||p.exp)return undefined;
   let t=S.recall[p.id];
-  if(t!=null&&!(S.cells[t]&&ROOM[S.cells[t].type].r))t=null;
+  if(t!=null&&!isWork(S.cells[t]))t=null;
   return t===p.room?undefined:t;
 }
 function recallTargets(){return S.attack?[]:S.peng.filter(p=>recallTarget(p)!==undefined);}
 function doRecall(){
   const changed=[];
   S.peng.forEach(p=>{const t=recallTarget(p);if(t===undefined)return;changed.push([p,p.room,t]);p.room=t;});
-  S.cells.forEach((c,i)=>{if(!c||!ROOM[c.type].r)return;const crew=crewOf(i),over=crew.length-slots(c);
+  S.cells.forEach((c,i)=>{if(!isWork(c))return;const crew=crewOf(i),over=crew.length-slots(c);
     if(over>0)crew.filter(p=>S.recall[p.id]!==i).slice(0,over).forEach(p=>{const ch=changed.find(x=>x[0]===p);if(ch)ch[2]=null;else changed.push([p,i,null]);p.room=null;});});
   changed.forEach(([p,f,t])=>queueMove(p,f,t));
   S.recall=null;log(`${changed.length} Pinguine kehren auf ihre Posten zurück.`,'good');
 }
+/* Freie und ruhende Pinguine wohnen sichtbar in den Quartieren */
+function residents(){
+  const out={},qs=S.cells.map((c,i)=>({c,i})).filter(o=>o.c&&o.c.type==='quarters');
+  const pool=S.peng.filter(q=>!q.exp&&q.room==null&&!(q.ex&&q.ward!=null));
+  let k=0;qs.forEach(({c,i})=>{const g=grpOf(i),cap=c.lvl*4+(g.pos===0?2*(g.len-1):0);out[i]=pool.slice(k,k+cap);k+=cap;});
+  if(qs.length&&k<pool.length)out[qs[qs.length-1].i]=out[qs[qs.length-1].i].concat(pool.slice(k));
+  return out;
+}
 function renderBase(){
+  const RESI=residents();
   GRP=groupsOf();
   let h='';
   for(let f=0;f<MAXF;f++){
@@ -1069,33 +1165,41 @@ function renderBase(){
       if(f>=S.floors){h+=`<div class="room rock">${f===S.floors?PL().rock:''}</div>`;continue;}
       if(!c){h+=`<div class="room empty${selC===i?' sel':''}" data-i="${i}" role="button" tabindex="0" aria-label="Leerer Platz, bauen"><b>+</b>Bauen</div>`;continue;}
       const R=ROOM[c.type],crew=crewOf(i);
-      const work=!!R.r;const on=work&&crew.some(p=>!p.ex);
+      const work=isWork(c),prod=!!R.r;const on=work&&crew.some(p=>!p.ex);
       const tgt=armed&&selP!=null&&work&&crew.length<slots(c)&&!crew.some(p=>p.id===selP);
       const sp=selP!=null?S.peng.find(q=>q.id===selP):null;
       const dark=work&&S.energy<=0&&c.type!=='reactor';
       let crewH='';
       if(work){crew.forEach(p=>crewH+=moving.has(p.id)?`<span class="slot incoming" title="${esc(p.name)} ist unterwegs"></span>`:`<button class="pgb${p.chat?' chat':''}${selP===p.id?' sel':''}" data-p="${p.id}" title="${esc(p.name)}">${pengSVG(p.c,p.ex)}</button>`);for(let k=crew.length;k<slots(c);k++)crewH+='<span class="slot"></span>';}
+      else if(c.type==='quarters'){const rs=RESI[i]||[],show=rs.filter(q=>!moving.has(q.id));
+        crewH=show.slice(0,6).map(p=>`<button class="pgb${p.chat?' chat':''}${selP===p.id?' sel':''}" data-p="${p.id}" title="${esc(p.name)}${p.ex?' (erschöpft)':' (ohne Aufgabe)'}">${pengSVG(p.c,p.ex)}</button>`).join('')+(show.length>6?`<span class="more">+${show.length-6}</span>`:'');}
       else crewH='';
-      const cap=work?bufCap(c):0,buf=Math.floor(c.buf||0),full=work&&buf>=cap;
+      const cap=prod?bufCap(c):0,buf=Math.floor(c.buf||0),full=prod&&buf>=cap;
       let out='';
-      if(work){const rate=c.type==='nest'&&crew.filter(q=>!q.ex).length<2?'braucht 2 Eltern':on?`+${(c.out||0).toFixed(c.type==='nest'?3:2)}/s ${RES[R.r].n}`:'steht still';
+      if(prod){const rate=c.type==='nest'&&crew.filter(q=>!q.ex).length<2?'braucht 2 Eltern':on?`+${(c.out||0).toFixed(c.type==='nest'?3:2)}/s ${RES[R.r].n}`:'steht still';
         const rate2=on?rate:'Bereitschaft';
         out=buf>=1?`<button class="collect${full?' full':''}" data-collect="${i}" title="Einsammeln · ${rate}">${full?'VOLL ':''}+${buf} ${RES[R.r].k||RES[R.r].n}</button>`
           :`<span class="rt2" title="${on?'':'Ohne Crew läuft der Raum im Frostschutz-Modus mit 25 % Strom'}">${rate2}</span>`;}
+      if(work&&!prod){const sk=skillOf(c);
+        if(c.type==='canteen'){const own=Math.round((0.06*c.lvl+0.012*crew.filter(q=>!q.ex).reduce((x,q)=>x+q.P,0))*(1+MERGE_BONUS*(grpOf(i).len-1))*100);out=`<span class="rt2" style="color:${on?roomCol(c):'var(--mute)'}">${on?`−${Math.min(60,own)} % Verbrauch`:'Bereitschaft'}</span>`;}
+        if(c.type==='radio'){out=`<span class="rt2" style="color:${on?roomCol(c):'var(--mute)'}">${!on?'Bereitschaft':(c.prog||0)>=FUNK?'wartet auf ein Bett':`Siedler: ${Math.floor((c.prog||0)/FUNK*100)} %`}</span>`;}
+        if(c.type==='academy'){out=`<span class="rt2" style="color:${on?roomCol(c):'var(--mute)'}">${on?`${STAT[sk]} ×3 Erfahrung`:'Bereitschaft'}</span>`;}}
+      if(c.type==='depot')out=`<span class="rt2" style="color:var(--ice)">+${Math.round(60*c.lvl*(1+MERGE_BONUS*(grpOf(i).len-1)))} Lagerplatz</span>`;
       if(c.type==='quarters')out=`<span style="color:var(--mute)">${S.peng.length} / ${capacity()} Betten belegt</span>`;
       if(c.type==='shield')out=`<span class="rt2" style="color:${S.energy>0?'var(--oxy)':'var(--alarm)'}">${S.energy>0?`Abwehr +${Math.round(12*c.lvl*(1+MERGE_BONUS*(grpOf(i).len-1)))}`:'ohne Energie aus'}</span>`;
       let needs='';
-      if(R.s){const v=sp?sp[R.s]:null,q=v==null?'':v>=7?'qhi':v>=4?'qmid':'qlo';
-        needs=`<div class="needs"><span class="need" title="Benötigte Fähigkeit${sp?': '+esc(sp.name)+' hat '+v:''}">${STAT[R.s]}${sp?`<b class="${q}">${v}</b>`:''}</span>${c.type==='med'?`<span class="pats" title="Betten im Lazarett">${patientsOf(i).filter(q=>!moving.has(q.id)).map(q=>pengSVG(q.c,true)).join('')}${patientsOf(i).length}/${beds(c)}</span>`:''}${c.type==='hangar'?`<span class="abw">Abwehr ${Math.round(crew.filter(p=>!p.ex).reduce((a,p)=>a+p.M*2,0))}</span>`:''}</div>`;}
+      const SK=work?skillOf(c):null;
+      if(SK){const v=sp?sp[SK]:null,q=v==null?'':v>=7?'qhi':v>=4?'qmid':'qlo';
+        needs=`<div class="needs"><span class="need" title="${c.type==='academy'?'Trainierte':'Benötigte'} Fähigkeit${sp?': '+esc(sp.name)+' hat '+v:''}">${STAT[SK]}${sp?`<b class="${q}">${v}</b>`:''}</span>${c.type==='med'?`<span class="pats" title="Betten im Lazarett">${patientsOf(i).filter(q=>!moving.has(q.id)).map(q=>pengSVG(q.c,true)).join('')}${patientsOf(i).length}/${beds(c)}</span>`:''}${c.type==='hangar'?`<span class="abw">Abwehr ${Math.round(crew.filter(p=>!p.ex).reduce((a,p)=>a+p.M*2,0))}</span>`:''}</div>`;}
       const defend=S.attack&&c.type==='hangar';
       const G=grpOf(i),jcls=(G.pos>0?' jl':'')+(G.pos<G.len-1?' jr':''),vb=G.len>1&&G.pos===G.len-1?`<span class="vb" title="Verbund aus ${G.len} Räumen">⛓ ×${G.len} · ${mergeBonusText(c.type,G.len)}</span>`:'';
-      const extra=work?`<i class="buf" style="width:${Math.min(100,(c.buf||0)/cap*100).toFixed(1)}%"></i>${c.inc?`<div class="inc"><b>${c.inc.name}!</b><div class="ibar"><i style="width:${Math.max(0,c.inc.hp/c.inc.max*100).toFixed(0)}%"></i></div><button class="btn hot" data-fight="${i}">Eingreifen</button></div>`:''}`:'';
-      h+=`<div class="room${on?' on':''}${selC===i?' sel':''}${tgt?' target':''}${dark?' dark':''}${flashTypes.includes(c.type)?' hit':''}${defend?' defend':''}${c.type==='reactor'&&S.boost>0?' boosted':''}${c.inc?' incident':''}${jcls}" data-i="${i}" role="button" tabindex="0" style="--rc:${R.r?RES[R.r].c:'var(--ice)'}"><div class="rt"></div><div class="nm"><span title="${R.n}">${R.k||R.n}</span><span>St.${c.lvl}</span></div>${needs}${out?`<div class="out">${out}</div>`:''}<div class="crew">${crewH}</div>${extra}${vb}</div>`;
+      const extra=work?`${prod?`<i class="buf" style="width:${Math.min(100,(c.buf||0)/cap*100).toFixed(1)}%"></i>`:c.type==='radio'?`<i class="buf" style="width:${Math.min(100,(c.prog||0)/FUNK*100).toFixed(1)}%"></i>`:''}${c.inc?`<div class="inc"><b>${c.inc.name}!</b><div class="ibar"><i style="width:${Math.max(0,c.inc.hp/c.inc.max*100).toFixed(0)}%"></i></div><button class="btn hot" data-fight="${i}">Eingreifen</button></div>`:''}`:'';
+      h+=`<div class="room${on?' on':''}${selC===i?' sel':''}${tgt?' target':''}${dark?' dark':''}${flashTypes.includes(c.type)?' hit':''}${defend?' defend':''}${c.type==='reactor'&&S.boost>0?' boosted':''}${c.inc?' incident':''}${jcls}" data-i="${i}" role="button" tabindex="0" style="--rc:${roomCol(c)}"><div class="rt"></div><div class="nm"><span title="${R.n}">${R.k||R.n}</span><span>St.${c.lvl}</span></div>${needs}${out?`<div class="out">${out}</div>`:''}<div class="crew">${crewH}</div>${extra}${vb}</div>`;
     }
     h+=`<div class="shaft${f>=S.floors?' locked':''}" title="Aufzug Ebene ${f+1}"><span>E${f+1}</span><i class="lamp"></i><i class="door"></i></div></div>`;
   }
   $('#base').innerHTML=h;
-  {const n=OUTPOST[opLvl()];$('#opCost').textContent=n?`Lager ${capOf()} → ${n.cap} · ${n.cr} Cr + ${n.cc} ◆`:`Stufe ${opLvl()} · Höchststufe`;
+  {const n=OUTPOST[opLvl()];$('#opCost').textContent=n?`Lager ${capOf()} → ${capOf()+n.cap-OUTPOST[opLvl()-1].cap} · ${n.cr} Cr + ${n.cc}\u00a0◆`:`Stufe ${opLvl()} · Höchststufe`;
    $('#opUp').disabled=!n||S.credits<n.cr||(S.crystals||0)<n.cc;}
   $('#digCost').textContent=S.floors>=MAXF?'max':digCost()+' Cr';
   $('#dig').disabled=S.floors>=MAXF||S.credits<digCost();
@@ -1116,9 +1220,16 @@ function statBlock(p){
 }
 function moveList(p){
   const best=Math.max(p.T,p.P,p.A,p.M);
-  const rooms=S.cells.map((c,i)=>({c,i})).filter(o=>o.c&&ROOM[o.c.type].r).sort((x,y)=>p[ROOM[y.c.type].s]-p[ROOM[x.c.type].s]||x.i-y.i);
+  const rooms=S.cells.map((c,i)=>({c,i})).filter(o=>isWork(o.c)).sort((x,y)=>p[skillOf(y.c)]-p[skillOf(x.c)]||x.i-y.i);
   return `<div class="moves">${rooms.map(({c,i})=>{const R=ROOM[c.type],n=crewOf(i).length,cur=p.room===i,full=n>=slots(c);
-    return `<button class="mv${cur?' cur':''}" data-move="${i}" style="--rc:${RES[R.r].c}" ${cur||full||p.ex?'disabled':''}><span>${R.k||R.n}<small>E${Math.floor(i/COLS)+1} · St.${c.lvl}</small></span><span class="ms${p[R.s]===best?' best':''}">${STAT[R.s]} ${p[R.s]}</span><span class="mf">${cur?'hier':full?'voll':n+' / '+slots(c)}</span></button>`;}).join('')}</div>`;
+    return `<button class="mv${cur?' cur':''}" data-move="${i}" style="--rc:${roomCol(c)}" ${cur||full||p.ex?'disabled':''}><span>${R.k||R.n}<small>E${Math.floor(i/COLS)+1} · St.${c.lvl}</small></span><span class="ms${p[skillOf(c)]===best?' best':''}">${STAT[skillOf(c)]} ${p[skillOf(c)]}</span><span class="mf">${cur?'hier':full?'voll':n+' / '+slots(c)}</span></button>`;}).join('')}</div>`;
+}
+function serviceInfo(c,i){
+  if(c.type==='academy')return `<h4>Trainierte Fähigkeit</h4><div class="actions">${['T','P','A','M'].map(k=>`<button class="btn${skillOf(c)===k?' hot':''}" data-train="${k}">${STAT[k]}</button>`).join('')}</div>`;
+  if(c.type==='radio')return `<p class="hint" style="margin-top:6px">Nächster Siedler: ${Math.floor((c.prog||0)/FUNK*100)} %${(c.prog||0)>=FUNK?' · wartet auf ein freies Bett':''}</p>`;
+  if(c.type==='canteen')return `<p class="hint" style="margin-top:6px">Ersparnis der ganzen Kolonie gerade: ${Math.round(canteenCut()*100)} % (höchstens 60 %).</p>`;
+  if(c.type==='depot')return `<p class="hint" style="margin-top:6px">Hauptlager fassen gerade ${capOf()} Einheiten.</p>`;
+  return '';
 }
 function renderDetail(){
   const el=$('#detail');
@@ -1136,7 +1247,7 @@ function renderDetail(){
       return;
     }
     const R=ROOM[c.type],crew=crewOf(selC);
-    el.innerHTML=`<h2>${R.n} · Stufe ${c.lvl}</h2><p class="hint">${R.d}</p>${R.r?`<p class="hint" style="margin-top:6px">Plätze: ${crew.length} / ${slots(c)}${crew.length?' · '+crew.map(q=>esc(q.name)).join(', '):''}</p><p class="hint" style="margin-top:6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">Störfallrisiko <span class="risk ${riskLabel(selC)[0]}">${riskLabel(selC)[1]}</span> <span>${crew.length?'Passende Fähigkeiten senken es, volle Räume erhöhen es leicht.':'Ohne Crew passiert hier nichts.'}</span></p>`:''}${c.type==='med'?`<p class="hint" style="margin-top:6px">Betten: ${patientsOf(selC).length} / ${beds(c)} · Erholung hier ${(2+.5*c.lvl+(c.inc?0:carers(selC))).toFixed(1)} HP/s vor Ausdauer-Bonus${carers(selC)?` (davon +${carers(selC).toFixed(1)} durch Pfleger)`:' (ohne Pfleger)'}. Im Quartier sind es nur etwa 1,2.</p>`:''}<div class="actions">${c.lvl<MAXLVL?(g=>`<button class="btn hot up" data-act="upgrade" ${S.credits<g.cr||(S.crystals||0)<g.cc?'disabled':''}><span>${g.n>1?`Verbund (${g.n} Räume) auf Stufe ${c.lvl+1}`:`Ausbauen auf Stufe ${c.lvl+1}`}</span><small>${R.r?`Raumlager ${bufCap(c)} → ${bufCap(c,c.lvl+1)} · `:''}${g.cr} Cr${g.cc?` + ${g.cc} ◆`:''}</small></button>`)(grpUpCost(selC)):'<span class="tag">Höchste Stufe</span>'}${R.r&&crew.length?'<button class="btn" data-act="clear">Alle abziehen</button>':''}${R.fixed?'':'<button class="btn danger" data-act="demoAsk">Abreißen</button>'}</div>${demoAsk===selC?(()=>{const why=demolishBlock(selC),rf=refundOf(c);return `<div class="confirm">${why?`<span>${why}</span><div class="actions" style="margin:0"><button class="btn" data-act="demoNo">OK</button></div>`:`<span>${R.n} wirklich abreißen? Du bekommst ${rf.cr} Credits${rf.cc?` und ${rf.cc} ◆`:''} zurück (50 %). Arbeiter gehen ins Quartier.</span><div class="actions" style="margin:0"><button class="btn danger hot" data-act="demoYes">Abreißen</button><button class="btn" data-act="demoNo">Abbrechen</button></div>`}</div>`;})():''}${(()=>{const G=grpOf(selC);return G.len>1?`<p class="hint" style="margin-top:8px">Teil eines Verbunds aus ${G.len} Räumen: ${mergeBonusLong(c.type,G.len)}. Ausbau gilt für den ganzen Verbund.</p>`:!R.fixed?`<p class="hint" style="margin-top:8px">Tipp: Baue denselben Raum direkt daneben (gleiche Stufe), dann verschmelzen sie zu einem Verbund mit ${c.type==='quarters'?'+2 Betten':'+15 %'} je Nachbar.</p>`:'';})()}${R.r?`<h4>Raumlager ${Math.floor(c.buf||0)} / ${bufCap(c)}</h4><div class="actions"><button class="btn" data-collect="${selC}" ${(c.buf||0)<1?'disabled':''}>Einsammeln</button><button class="btn" data-act="rush" ${c.inc||c.type==='nest'||(c.buf||0)>=bufCap(c)?'disabled':''}>Beschleunigen <span class="cost" style="color:var(--alarm)">Risiko ${Math.round(rushRisk(c)*100)}%</span></button></div><p class="hint" style="margin-top:6px">Beschleunigen füllt das Raumlager sofort, kann aber einen Störfall auslösen. Das Risiko steigt mit jedem Versuch und sinkt pro Minute wieder.</p>`:''}`;
+    el.innerHTML=`<h2>${R.n} · Stufe ${c.lvl}</h2><p class="hint">${R.d}</p>${serviceInfo(c,selC)}${isWork(c)?`<p class="hint" style="margin-top:6px">Plätze: ${crew.length} / ${slots(c)}${crew.length?' · '+crew.map(q=>esc(q.name)).join(', '):''}</p><p class="hint" style="margin-top:6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">Störfallrisiko <span class="risk ${riskLabel(selC)[0]}">${riskLabel(selC)[1]}</span> <span>${crew.length?'Passende Fähigkeiten senken es, volle Räume erhöhen es leicht.':'Ohne Crew passiert hier nichts.'}</span></p>`:''}${c.type==='med'?`<p class="hint" style="margin-top:6px">Betten: ${patientsOf(selC).length} / ${beds(c)} · Erholung hier ${(2+.5*c.lvl+(c.inc?0:carers(selC))).toFixed(1)} HP/s vor Ausdauer-Bonus${carers(selC)?` (davon +${carers(selC).toFixed(1)} durch Pfleger)`:' (ohne Pfleger)'}. Im Quartier sind es nur etwa 1,2.</p>`:''}<div class="actions">${c.lvl<MAXLVL?(g=>`<button class="btn hot up" data-act="upgrade" ${S.credits<g.cr||(S.crystals||0)<g.cc?'disabled':''}><span>${g.n>1?`Verbund (${g.n} Räume) auf Stufe ${c.lvl+1}`:`Ausbauen auf Stufe ${c.lvl+1}`}</span><small>${R.r?`Raumlager ${bufCap(c)} → ${bufCap(c,c.lvl+1)} · `:''}${g.cr} Cr${g.cc?` + ${g.cc} ◆`:''}</small></button>`)(grpUpCost(selC)):'<span class="tag">Höchste Stufe</span>'}${R.r&&crew.length?'<button class="btn" data-act="clear">Alle abziehen</button>':''}${R.fixed?'':'<button class="btn danger" data-act="demoAsk">Abreißen</button>'}</div>${demoAsk===selC?(()=>{const why=demolishBlock(selC),rf=refundOf(c);return `<div class="confirm">${why?`<span>${why}</span><div class="actions" style="margin:0"><button class="btn" data-act="demoNo">OK</button></div>`:`<span>${R.n} wirklich abreißen? Du bekommst ${rf.cr} Credits${rf.cc?` und ${rf.cc} ◆`:''} zurück (50 %). Arbeiter gehen ins Quartier.</span><div class="actions" style="margin:0"><button class="btn danger hot" data-act="demoYes">Abreißen</button><button class="btn" data-act="demoNo">Abbrechen</button></div>`}</div>`;})():''}${(()=>{const G=grpOf(selC);return G.len>1?`<p class="hint" style="margin-top:8px">Teil eines Verbunds aus ${G.len} Räumen: ${mergeBonusLong(c.type,G.len)}. Ausbau gilt für den ganzen Verbund.</p>`:!R.fixed?`<p class="hint" style="margin-top:8px">Tipp: Baue denselben Raum direkt daneben (gleiche Stufe), dann verschmelzen sie zu einem Verbund mit ${c.type==='quarters'?'+2 Betten':'+15 %'} je Nachbar.</p>`:'';})()}${R.r?`<h4>Raumlager ${Math.floor(c.buf||0)} / ${bufCap(c)}</h4><div class="actions"><button class="btn" data-collect="${selC}" ${(c.buf||0)<1?'disabled':''}>Einsammeln</button><button class="btn" data-act="rush" ${c.inc||c.type==='nest'||(c.buf||0)>=bufCap(c)?'disabled':''}>Beschleunigen <span class="cost" style="color:var(--alarm)">Risiko ${Math.round(rushRisk(c)*100)}%</span></button></div><p class="hint" style="margin-top:6px">Beschleunigen füllt das Raumlager sofort, kann aber einen Störfall auslösen. Das Risiko steigt mit jedem Versuch und sinkt pro Minute wieder.</p>`:''}`;
     return;
   }
   const idle=S.peng.filter(q=>q.room==null&&!q.ex).length;
@@ -1308,7 +1419,7 @@ let armed=false;
 function selectPeng(id){selP=selP===id?null:id;selC=null;armed=false;render();}
 function cellClick(i){
   const c=S.cells[i];
-  if(armed&&selP!=null&&c&&ROOM[c.type].r){const p=S.peng.find(q=>q.id===selP);if(p)assign(p,i);armed=false;render();return;}
+  if(armed&&selP!=null&&isWork(c)){const p=S.peng.find(q=>q.id===selP);if(p)assign(p,i);armed=false;render();return;}
   armed=false;selP=null;selC=selC===i?null:i;render();
 }
 document.addEventListener('pointerdown',e=>{
@@ -1319,6 +1430,7 @@ document.addEventListener('pointerdown',e=>{
 document.addEventListener('click',e=>{
   const quick=e.target.closest('[data-collect],[data-fight]');
   if(quick){if(e.detail===0){quick.dataset.collect!=null?collect(+quick.dataset.collect):fight(+quick.dataset.fight);}return;}
+  const tr=e.target.closest('[data-train]');if(tr&&selC!=null&&S.cells[selC]){S.cells[selC].tr=tr.dataset.train;render();return;}
   const eq=e.target.closest('[data-equip]');if(eq){equip(S.peng.find(q=>q.id===selP),+eq.dataset.equip);render();return;}
   const cl=e.target.closest('[data-claim]');if(cl){claimQuest(+cl.dataset.claim);return;}
   const qs=e.target.closest('[data-qswap]');if(qs){swapQuest(+qs.dataset.qswap);return;}
@@ -1359,7 +1471,9 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&armed){armed=false;render();e.stopImmediatePropagation();return;}if((e.key==='Enter'||e.key===' ')&&e.target.matches('#base [data-i]')){e.preventDefault();cellClick(+e.target.dataset.i);}});
 document.addEventListener('change',e=>{if(e.target.id==='rename'){const p=S.peng.find(q=>q.id===selP);const v=e.target.value.trim();if(p&&v){p.name=v.slice(0,24);e.target.blur();render();save();}}});
-$('#planetBtn').onclick=()=>switchPlanet((S.planet||'ice')==='ice'?'desert':'ice');
+$('#planetBtn').onclick=()=>openMap($('#map').hidden);
+$('#mapClose').onclick=()=>openMap(false);
+$('#map').addEventListener('click',e=>{if(e.target.id==='map'){openMap(false);return;}const b=e.target.closest('[data-planet]');if(b)switchPlanet(b.dataset.planet);});
 $('#opUp').onclick=()=>{const n=OUTPOST[opLvl()];if(!n||S.credits<n.cr||(S.crystals||0)<n.cc)return;S.credits-=n.cr;S.crystals-=n.cc;S.op=opLvl()+1;sfx('upgrade');
   log(`Außenposten auf Stufe ${S.op} ausgebaut. Hauptlager fassen jetzt ${capOf()} Einheiten.`,'good');ribbon(`<b>Außenposten Stufe ${S.op}</b> · Lager ${capOf()}`,'var(--beak)');render();};
 $('#dig').onclick=()=>{if(S.credits<digCost()||S.floors>=MAXF)return;S.credits-=digCost();S.floors++;sfx('build');log(`Ebene ${S.floors} ins Eis gefräst.`);render();};
@@ -1485,6 +1599,7 @@ $('#resumeBtn').onclick=()=>setPaused(false);
 document.addEventListener('keydown',e=>{
   if(e.target.matches('input,textarea'))return;
   if(e.key==='p'||e.key==='P'){e.preventDefault();setPaused(!paused);}
+  else if(e.key==='Escape'&&!$('#map').hidden){openMap(false);}
   else if(e.key==='Escape'&&!armed){openMenu($('#menu').hidden);}
 });
 document.addEventListener('visibilitychange',()=>{if(AS.ap&&document.hidden&&!paused)setPaused(true);});
